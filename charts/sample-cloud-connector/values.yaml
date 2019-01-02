@@ -20,14 +20,6 @@ global:
   ## Most likely this will be just one host, but in the event more hosts are needed, this is an array
   ingress:
     hostName: ""
-db:
-  uri: ""
-  name: activitipostgresql
-  deployPostgres: false
-  port: 5432
-
-activitipostgresql:
-   postgresPassword: activiti
 
 ## Allows the specification of additional environment variables
 extraEnv: |
@@ -42,11 +34,11 @@ javaOpts:
   xms: 512m
   other: -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
 image:
-  repository: activiti/example-runtime-bundle
-  tag: 7.0.0.Beta4
+  repository: activiti-cloud-connector-custom
+  tag: 0.0.1-SNAPSHOT
   pullPolicy: IfNotPresent
 service:
-  name: rb-my-app
+  name: sample-activiti7-cc-app
   type: ClusterIP
   externalPort: 80
   internalPort: 8080
@@ -75,7 +67,7 @@ ingress:
   ## Set to true to enable ingress record generation
   enabled: false
 
-  path: /rb-my-app
+  path: /sample-cloud-connector
 
   ## Set this to true in order to enable TLS on the ingress record
   tls: false
