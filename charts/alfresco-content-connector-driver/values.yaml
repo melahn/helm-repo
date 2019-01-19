@@ -1,6 +1,3 @@
-# Default values for Maven projects.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
 replicaCount: 1
 global:
   rabbitmq:
@@ -29,24 +26,18 @@ db:
 activitipostgresql:
    postgresPassword: activiti
 
-## Allows the specification of additional environment variables
 extraEnv: |
-  # - name: ACT_KEYCLOAK_URL
-  #   valueFrom:
-  #     configMapKeyRef:
-  #       name: {{ .Release.Name }}-keycloak-http
-  #       key: expose-keycloak-service-key
 
 javaOpts:
   xmx: 768m
   xms: 512m
   other: -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
 image:
-  repository: content-connector-driver
+  repository: alfresco-content-connector-driver
   tag: 0.0.1-SNAPSHOT
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 service:
-  name: content-connector-driver-app
+  name: alfresco-content-connector-driver-app
   type: ClusterIP
   externalPort: 80
   internalPort: 8080

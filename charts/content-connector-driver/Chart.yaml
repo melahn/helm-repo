@@ -1,5 +1,0 @@
-apiVersion: v1
-description: A helm for the content connector driver runtime bundle
-icon: https://raw.githubusercontent.com/jenkins-x/jenkins-x-platform/master/images/java.png
-name: content-connector-driver
-version: 0.0.1
