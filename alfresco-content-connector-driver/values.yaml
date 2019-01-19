@@ -35,7 +35,7 @@ javaOpts:
 image:
   repository: alfresco-connector-driver
   tag: 0.0.1-SNAPSHOT
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
 service:
   name: alfresco-content-connector-driver-app
   type: ClusterIP
