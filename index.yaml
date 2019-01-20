@@ -2,9 +2,9 @@ apiVersion: v1
 entries:
   alfresco-content-connector-driver:
   - apiVersion: v1
-    created: 2019-01-19T17:08:55.587388131-05:00
+    created: 2019-01-20T11:45:22.334653465-05:00
     description: A helm for the Alfresco content connector driver runtime bundle
-    digest: 0f41feae0cd29adcb56ce88554a84a9f61f781915098c6d1ff6175b379145800
+    digest: 1f4baa82b78d5a37bae104ea189314ebe7e5afd14370cab7747b4f40c48e4a8a
     icon: https://secure.gravatar.com/avatar/4fa13c8f5c909e04561a81e4f3b887a9.jpg
     name: alfresco-content-connector-driver
     urls:
@@ -12,7 +12,7 @@ entries:
     version: 0.0.1
   sample-cloud-connector:
   - apiVersion: v1
-    created: 2019-01-19T17:08:55.58793395-05:00
+    created: 2019-01-20T11:45:22.335139009-05:00
     description: A Helm chart for Kubernetes
     digest: d289587acaa9a0d2282d5ff57747fd657660d171f8edb1bc4dcde6d77b670b57
     icon: https://raw.githubusercontent.com/jenkins-x/jenkins-x-platform/master/images/java.png
@@ -22,7 +22,7 @@ entries:
     version: 0.1.0
   sample-runtime-bundle:
   - apiVersion: v1
-    created: 2019-01-19T17:08:55.589007048-05:00
+    created: 2019-01-20T11:45:22.335617302-05:00
     description: A Helm chart for Kubernetes
     digest: eea30eff530e309275b382f78fb77e94f693ea9f590906d84302006df1857fcc
     icon: https://raw.githubusercontent.com/jenkins-x/jenkins-x-platform/master/images/java.png
@@ -30,4 +30,4 @@ entries:
     urls:
     - https://melahn.github.io/helm-repo/sample-runtime-bundle-0.1.0.tgz
     version: 0.1.0
-generated: 2019-01-19T17:08:55.586606469-05:00
+generated: 2019-01-20T11:45:22.333645817-05:00
