@@ -1,1 +1,0 @@
-#Alfresco Content Connector Driver
