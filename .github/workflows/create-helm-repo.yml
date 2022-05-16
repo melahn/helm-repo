@@ -1,0 +1,90 @@
+#
+# This workflow will create a helm charts repo and make it available publicly for test purposes.
+#
+# To use the repo add the following to your helm repo list as follows ...
+#   helm repo add melahn https://melahn.github.io/helm-repo
+#
+name: Create Helm Repository
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow manually
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'Deploy a Fresh Helm Repository'
+
+jobs:
+  # This workflow contains a single job called "build-helm-repo"
+  build-helm-repo:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out the repo using v3
+      - uses: actions/checkout@v3
+
+      # Install helm
+      - name: Helm tool installer
+        uses: Azure/setup-helm@v1
+
+      # Create the charts
+      - name: Create the charts
+        run: |
+          mkdir charts
+          # app-x has 1 version
+          helm create charts/test-app-x
+          # app-y has 2 versions
+          helm create charts/test-app-y
+          helm create charts/test-app-y2
+          sed -i 's/0.1.0/0.2.0/g' charts/test-app-y2/Chart.yaml
+          sed -i 's/test-app-y2/test-app-y/g' charts/test-app-y2/Chart.yaml
+          # app-z has 3 versions
+          helm create charts/test-app-z
+          helm create charts/test-app-z2
+          sed -i 's/0.1.0/0.2.0/g' charts/test-app-z2/Chart.yaml
+          sed -i 's/test-app-c2/test-app-z/g' charts/test-app-z2/Chart.yaml
+          helm create charts/test-app-z3
+          sed -i 's/0.1.0/0.3.0/g' charts/test-app-z3/Chart.yaml
+          sed -i 's/test-app-z3/test-app-z/g' charts/test-app-z3/Chart.yaml
+          helm create charts/test-app-z3
+          sed -i 's/0.1.0/0.3.0/g' charts/test-app-z3/Chart.yaml
+          sed -i 's/test-app-z3/test-app-z/g' charts/test-app-z3/Chart.yaml
+          # add the icon field that lint likes
+          echo "icon: \"https://helm.sh/img/helm.svg\"" >> charts/test-app-x/Chart.yaml
+          echo "icon: \"https://helm.sh/img/helm.svg\"" >> charts/test-app-y/Chart.yaml
+          echo "icon: \"https://helm.sh/img/helm.svg\"" >> charts/test-app-y2/Chart.yaml
+          echo "icon: \"https://helm.sh/img/helm.svg\"" >> charts/test-app-z/Chart.yaml
+          echo "icon: \"https://helm.sh/img/helm.svg\"" >> charts/test-app-z2/Chart.yaml
+          echo "icon: \"https://helm.sh/img/helm.svg\"" >> charts/test-app-z3/Chart.yaml
+          # lint the resulting modified charts
+          helm lint charts/*
+      # Package the charts
+      - name: Package the charts
+        run: |
+          helm package charts/test-app-x
+          helm package charts/test-app-y
+          helm package charts/test-app-y2
+          helm package charts/test-app-z
+          helm package charts/test-app-z2
+          helm package charts/test-app-z3
+      # Create the index
+      - name: Create the index
+        run: |
+          helm repo index --url https://melahn.github.io/helm-repo .
+          cat index.yaml
+      # Commit to git
+      - name: Commit to git
+        run: |
+          rm -rf charts
+          if [[ `git status --porcelain` ]]; then
+              git config --global user.email "melahn@github"
+              git config --global user.name "GitHub Action (create-helm-repo.yml)"
+              git add *.tgz
+              git add index.yaml
+              git commit -m "Helm Repository Updated from GitHub action create-helm-repo"
+              git pull origin main
+              git push origin main
+          else
+              echo no git changes found
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
