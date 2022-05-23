@@ -60,6 +60,7 @@ jobs:
           echo "icon: \"https://helm.sh/img/helm.svg\"" >> charts/test-app-z2/Chart.yaml
           echo "icon: \"https://helm.sh/img/helm.svg\"" >> charts/test-app-z3/Chart.yaml
           # lint the resulting modified charts
+          cat charts/test-app-x/Chart.yaml
           helm lint charts/*
       # Package the charts
       - name: Package the charts
