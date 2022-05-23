@@ -45,6 +45,13 @@ jobs:
           helm create charts/test-app-z3
           sed -i 's/0.1.0/0.3.0/g' charts/test-app-z3/Chart.yaml
           sed -i 's/test-app-z3/test-app-z/g' charts/test-app-z3/Chart.yaml
+          # add the repository field
+          echo "repository: \"https://melahn.github.io/helm-repo\"" >> charts/test-app-x/Chart.yaml
+          echo "repository: \"https://melahn.github.io/helm-repo\"" >> charts/test-app-y/Chart.yaml
+          echo "repository: \"https://melahn.github.io/helm-repo\"" >> charts/test-app-y2/Chart.yaml
+          echo "repository: \"https://melahn.github.io/helm-repo\"" >> charts/test-app-z/Chart.yaml
+          echo "repository: \"https://melahn.github.io/helm-repo\"" >> charts/test-app-z2/Chart.yaml
+          echo "repository: \"https://melahn.github.io/helm-repo\"" >> charts/test-app-z3/Chart.yaml
           # add the icon field that lint likes
           echo "icon: \"https://helm.sh/img/helm.svg\"" >> charts/test-app-x/Chart.yaml
           echo "icon: \"https://helm.sh/img/helm.svg\"" >> charts/test-app-y/Chart.yaml
